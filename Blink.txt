@@ -1,0 +1,26 @@
+int Led = 8;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(Led, OUTPUT);
+  Serial.println("Enter '1' for LED On or '0' for LED Off");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n'); // Read until Enter key
+    command.trim(); // Remove spaces/newlines
+
+    if (command == "on") {
+      digitalWrite(Led, HIGH);
+      Serial.println("LED ON");
+    } 
+    else if (command == "off") {
+      digitalWrite(Led, LOW);
+      Serial.println("LED OFF");
+    } 
+    else {
+      Serial.println("Invalid data");
+    }
+  }
+}
